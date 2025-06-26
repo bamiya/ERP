@@ -3,10 +3,10 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/erpdb?currentSchema=erpdb
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:postgresql://localhost:5432/erpdb?currentSchema=erpdb
     username: postgres
     password: ninest
-    driver-class-name: org.postgresql.Driver
 
 mybatis:
    mapper-locations: classpath*:/mapper/**/*.xml
@@ -15,9 +15,9 @@ mybatis:
 logging:
   level:
     root: info
-    com.JDERP.ERP: debug
-    com.JDERP.ERP.mapper: DEBUG   # MyBatis Mapper 패키지 로그
-    org.mybatis: DEBUG            # MyBatis 내부 동작 로그
-    jdbc.sqlonly: DEBUG           # SQL 로그 (log4jdbc 사용 시)
-    org.mybatis.spring.mapper.MapperFactoryBean: DEBUG
-    org.apache.ibatis: DEBUG
+    # log4jdbc 설정
+    jdbc.sqlonly: debug         # ✅ 실행된 SQL만 표시
+    jdbc.sqltiming: off         # ❌ 실행 시간 포함된 로그 끄기
+    jdbc.audit: off             # ❌ Connection, ResultSet 메소드 로그 끄기
+    jdbc.resultset: off         # ❌ ResultSet 관련 메서드 로그 끄기
+    jdbc.connection: off        # ❌ Connection 관련 메서드 로그 끄기
