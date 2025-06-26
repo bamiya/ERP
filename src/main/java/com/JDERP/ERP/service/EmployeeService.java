@@ -10,10 +10,14 @@ import java.util.List;
 @Service
 public class EmployeeService {
 
+    private final EmployeeMapper mapper;
+
     @Autowired
-    EmployeeMapper employeeMapper;
+    public EmployeeService(EmployeeMapper mapper) {
+        this.mapper = mapper;
+    }
 
     public List<Employee> getAllEmployees() {
-        return employeeMapper.selectAll();
+        return mapper.selectAll();
     }
 }

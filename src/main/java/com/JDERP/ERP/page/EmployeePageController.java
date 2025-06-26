@@ -11,13 +11,17 @@ import java.util.List;
 
 @Controller
 public class EmployeePageController {
+    private final EmployeeService service;
+
     @Autowired
-    private EmployeeService employeeService;
+    public EmployeePageController(EmployeeService service) {
+        this.service = service;
+    }
 
     @GetMapping("/employees/page")
     public String employeePage(Model model) {
-        List<Employee> employees = employeeService.getAllEmployees();
+        List<Employee> employees = service.getAllEmployees();
         model.addAttribute("employees", employees);
-        return "employee";  // resources/templates/employee.html
+        return "employee";  // src/main/resources/templates/employee.html
     }
 }
