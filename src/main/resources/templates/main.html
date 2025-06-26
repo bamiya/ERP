@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ERP 메인화면</title>
+    <meta charset="UTF-8" />
+</head>
+<body>
+<h1>ERP 메인화면</h1>
+<p>아래 버튼을 눌러 사원 관리 화면으로 이동하세요.</p>
+
+<form th:action="@{/employees/page}" method="get">
+    <button type="submit">사원 관리</button>
+</form>
+</body>
+</html>

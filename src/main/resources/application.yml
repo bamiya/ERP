@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/erpdb
+    username: postgres
+    password: ninest
+    driver-class-name: org.postgresql.Driver
+
+  mybatis:
+    mapper-locations: classpath:/mapper/*.xml
+    type-aliases-package: com.JDERP.ERP.model
+
+logging:
+  level:
+    root: info
+    com.JDERP.ERP: debug
+    com.JDERP.ERP.mapper: DEBUG   # MyBatis Mapper 패키지 로그
+    org.mybatis: DEBUG            # MyBatis 내부 동작 로그
+    jdbc.sqlonly: DEBUG           # SQL 로그 (log4jdbc 사용 시)
