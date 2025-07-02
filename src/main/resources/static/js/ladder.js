@@ -119,7 +119,7 @@ function animatePath(startIdx) {
             ctx.strokeStyle = 'red';
             ctx.lineWidth = 3;
             ctx.stroke();
-            t += 0.05;
+            t += 0.2;
             if(t<=1) requestAnimationFrame(segment);
             else {
                 step++;
