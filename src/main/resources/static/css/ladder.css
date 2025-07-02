@@ -1,0 +1,58 @@
+body {
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.controls {
+    margin: 20px;
+}
+
+.ladder-container {
+    position: relative;
+    width: 600px;
+    height: 500px;
+    margin: 0 auto 50px;
+    border: 1px solid #ccc;
+}
+
+#canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; /* 애니메이션용 아래 레이어 */
+}
+
+#layers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 600px;
+    height: 500px;
+    z-index: 2; /* 클릭 가능한 위 레이어 */
+}
+
+.line-vertical {
+    position: absolute;
+    width: 2px;
+    background: black;
+    top: 50px;
+    bottom: 50px;
+}
+
+.line-horizontal {
+    position: absolute;
+    height: 2px;
+    background: gray;
+}
+
+.player-name, .result-name {
+    position: absolute;
+    width: 80px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+}
+
+.player-name { top: 10px; }
+.result-name { bottom: 10px; }
