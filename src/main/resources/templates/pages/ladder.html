@@ -1,0 +1,13 @@
+<!-- src/main/resources/templates/pages/ladder.html -->
+<div th:fragment="content" xmlns:th="http://www.thymeleaf.org">
+  <h1 class="h3 mb-4 text-gray-800">사다리 게임</h1>
+
+  <div class="controls mb-3">
+    <button id="shuffleBtn" class="btn btn-primary">섞기</button>
+  </div>
+
+  <div class="ladder-container" id="ladder">
+    <canvas id="canvas" width="600" height="500"></canvas>
+    <div id="layers"></div>
+  </div>
+</div>

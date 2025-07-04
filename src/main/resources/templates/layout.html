@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ERP System</title>
+    <link href="/bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="/bootstrap/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/css/ladder.css" rel="stylesheet">
+</head>
+<body id="page-top">
+
+<div id="wrapper">
+    <!-- 사이드바 -->
+    <div th:replace="fragments/sidebar :: sidebar"></div>
+
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- 헤더 -->
+        <div th:replace="fragments/header :: header"></div>
+
+        <!-- 본문: 여기에 pages/<name>.html 의 fragment 'content'가 들어옵니다 -->
+        <div class="container-fluid">
+            <div th:replace="~{${content} :: content}"></div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/bootstrap/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/bootstrap/js/sb-admin-2.min.js}"></script>
+<script th:src="@{/js/ladder.js}"></script>
+</body>
+</html>
