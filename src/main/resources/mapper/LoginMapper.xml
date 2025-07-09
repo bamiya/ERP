@@ -3,11 +3,11 @@
 
 <mapper namespace="com.JDERP.ERP.mapper.LoginMapper">
 
-    <select id="login" resultType="com.JDERP.ERP.model.Employee">
-        SELECT EMP_CD, EMP_NM, DEPT_CD
-        FROM EMPLOYEE
-        WHERE EMP_CD = #{emp_cd}
-        AND PASSWORD = #{password}
+    <select id="login" resultType="com.JDERP.ERP.model.Login">
+        SELECT user_id, password
+        FROM login_info
+        WHERE user_id = #{userId}
+        AND password = #{password}
     </select>
 
 </mapper>

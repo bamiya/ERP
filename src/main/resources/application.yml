@@ -11,13 +11,15 @@ spring:
 mybatis:
    mapper-locations: classpath*:/mapper/**/*.xml
    type-aliases-package: com.JDERP.ERP.model
+   map-underscore-to-camel-case: true
 
 logging:
   level:
-    root: info
+    root: INFO
     # log4jdbc 설정
-    jdbc.sqlonly: debug         # ✅ 실행된 SQL만 표시
-    jdbc.sqltiming: off         # ❌ 실행 시간 포함된 로그 끄기
-    jdbc.audit: off             # ❌ Connection, ResultSet 메소드 로그 끄기
-    jdbc.resultset: off         # ❌ ResultSet 관련 메서드 로그 끄기
-    jdbc.connection: off        # ❌ Connection 관련 메서드 로그 끄기
+    jdbc.sqlonly: OFF         # ✅ 실행된 SQL만 표시
+    jdbc.sqltiming: OFF         # ❌ 실행 시간 포함된 로그 끄기
+    jdbc.audit: OFF             # ❌ Connection, ResultSet 메소드 로그 끄기
+    jdbc.resultset: OFF         # ❌ ResultSet 관련 메서드 로그 끄기
+    jdbc.connection: OFF        # ❌ Connection 관련 메서드 로그 끄기
+    jdbc.resultsettable: OFF

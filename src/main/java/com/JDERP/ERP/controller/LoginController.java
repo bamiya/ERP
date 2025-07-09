@@ -3,6 +3,7 @@ package com.JDERP.ERP.controller;
 import com.JDERP.ERP.dto.LoginRequestDto;
 import com.JDERP.ERP.mapper.LoginMapper;
 import com.JDERP.ERP.model.Employee;
+import com.JDERP.ERP.model.Login;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,9 +26,12 @@ public class LoginController {
 
     @PostMapping("/login")
     public String login(@ModelAttribute LoginRequestDto loginDto, HttpSession session, Model model) {
-        Employee emp = loginMapper.login(loginDto.getEmp_cd(), loginDto.getPassword());
-        if (emp != null) {
-            session.setAttribute("loginUser", emp);
+        Login loginUser = loginMapper.login(
+                loginDto.getUserId(),
+                loginDto.getPassword()
+        );
+        if (loginUser != null) {
+            session.setAttribute("loginUser", loginUser);
             return "redirect:/main";
         } else {
             model.addAttribute("loginError", "아이디 또는 비밀번호가 잘못되었습니다.");
