@@ -1,22 +1,39 @@
+<!-- templates/pages/employee.html -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>사원 목록</title>
-  <meta charset="UTF-8" />
-</head>
-<body>
-<h1>사원 목록</h1>
-<table border="1">
-  <tr>
-    <th>사원번호</th>
-    <th>이름</th>
-    <th>부서</th>
-  </tr>
-  <tr th:each="emp : ${employees}">
-    <td th:text="${emp.emp_cd}"></td>
-    <td th:text="${emp.emp_nm}"></td>
-    <td th:text="${emp.dept_cd}"></td>
-  </tr>
-</table>
+<body xmlns:th="http://www.thymeleaf.org">
+
+<!-- 이 파일은 layout.html 안에서 th:replace 되는 fragment 입니다 -->
+<div th:fragment="content">
+  <h2>사원 조회</h2>
+  <div id="employeeGrid" class="ag-theme-alpine" style="height:500px; width:100%"></div>
+</div>
+
+<!-- ag‑Grid 로딩은 layout.html 하단에 이미 포함하거나, 프래그먼트 안에 스크립트를 넣어도 됩니다 -->
+<script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.noStyle.js"></script>
+<script th:inline="javascript">
+  /*<![CDATA[*/
+  const columnDefs = [
+    { headerName:'사원코드', field:'empCd' },
+    { headerName:'사원명',   field:'empNm' },
+    { headerName:'부서코드', field:'deptCd' },
+    { headerName:'퇴사여부', field:'ynOut' },
+    { headerName:'직책',     field:'deptPosition' },
+    { headerName:'근무유형', field:'tpWeekly' }
+  ];
+  const gridOptions = {
+    columnDefs,
+    rowData:null,
+    defaultColDef:{ sortable:true, filter:true, resizable:true },
+    pagination:true, paginationPageSize:20
+  };
+  document.addEventListener('DOMContentLoaded',()=>{
+    new agGrid.Grid(document.querySelector('#employeeGrid'), gridOptions);
+    fetch('/employee/list')
+      .then(r=>r.json())
+      .then(data=>gridOptions.api.setRowData(data));
+  });
+  /*]]>*/
+</script>
 </body>
 </html>

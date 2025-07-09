@@ -1,27 +1,32 @@
 package com.JDERP.ERP.controller;
 
-import com.JDERP.ERP.mapper.EmployeeMapper;
 import com.JDERP.ERP.model.Employee;
 import com.JDERP.ERP.service.EmployeeService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/employees")
+@Controller
+@RequestMapping("/employee")
+@RequiredArgsConstructor
 public class EmployeeController {
 
-    @Autowired
-    private EmployeeService employeeService;
+    private final EmployeeService employeeService;
 
-    @Autowired
-    private EmployeeMapper employeeMapper;
-
+    // 1) 페이지 호출 → templates/pages/employee.html 렌더링
     @GetMapping
-    public List<Employee> getAll() {
-        return employeeService.getAllEmployees();
+    public String showEmployeePage(Model model) {
+        // (필요 시 초기값)
+        return "pages/employee";
+    }
+
+    // 2) AJAX용 데이터 API → JSON 반환
+    @GetMapping("/list")
+    @ResponseBody
+    public List<Employee> getEmployeeList() {
+        return employeeService.selectEmployeeList();
     }
 }

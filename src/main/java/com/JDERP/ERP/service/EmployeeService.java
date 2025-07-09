@@ -2,22 +2,17 @@ package com.JDERP.ERP.service;
 
 import com.JDERP.ERP.mapper.EmployeeMapper;
 import com.JDERP.ERP.model.Employee;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class EmployeeService {
+    private final EmployeeMapper employeeMapper;
 
-    private final EmployeeMapper mapper;
-
-    @Autowired
-    public EmployeeService(EmployeeMapper mapper) {
-        this.mapper = mapper;
-    }
-
-    public List<Employee> getAllEmployees() {
-        return mapper.selectAll();
+    public List<Employee> selectEmployeeList() {
+        return employeeMapper.selectEmployeeList();
     }
 }

@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface EmployeeMapper {
-    List<Employee> selectAll();
+    List<Employee> selectEmployeeList();
 }
