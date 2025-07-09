@@ -19,8 +19,8 @@ public class EmployeeController {
     // 1) 페이지 호출 → templates/pages/employee.html 렌더링
     @GetMapping
     public String showEmployeePage(Model model) {
-        // (필요 시 초기값)
-        return "pages/employee";
+        model.addAttribute("content", "pages/employee"); // ← fragment 위치
+        return "layout"; // ← 전체 layout 템플릿
     }
 
     // 2) AJAX용 데이터 API → JSON 반환
