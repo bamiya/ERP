@@ -3,10 +3,13 @@
 <mapper namespace="com.JDERP.ERP.mapper.EmployeeMapper">
 
     <select id="selectEmployeeList" resultType="com.JDERP.ERP.model.Employee">
-        SELECT emp_cd,
-               emp_nm,
-               dept_cd
-          FROM emp
+        SELECT emp_cd AS empCd,
+               emp_nm AS empNm,
+               dept_cd AS deptCd,
+               yn_out AS ynOut,
+               dept_position AS deptPosition,
+               tp_weekly AS tpWeekly
+          FROM erpdb.emp
     </select>
 
 </mapper>

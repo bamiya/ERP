@@ -1,31 +1,63 @@
 <!-- templates/pages/employee.html -->
 <div th:fragment="content" xmlns:th="http://www.thymeleaf.org">
   <h2>사원조회</h2>
-  <div id="employeeGrid" class="ag-theme-alpine" style="height: 500px; width: 100%"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.noStyle.js"></script>
+  <div id="employeeGrid" class="ag-theme-alpine" style="height: 600px; width: 100%;"></div>
+
+  <!-- ① 스타일 먼저 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-grid.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-theme-alpine.css">
+
+  <!-- ② AG Grid 라이브러리 -->
+  <script src="https://cdn.jsdelivr.net/npm/ag-grid-community@31.2.1/dist/ag-grid-community.min.js"></script>
+
+  <!-- ③ 자바스크립트 실행 -->
   <script th:inline="javascript">
-    const columnDefs = [
-      { headerName: '사원코드', field: 'empCd' },
-      { headerName: '이름', field: 'empNm' },
-      { headerName: '부서코드', field: 'deptCd' }
-    ];
-
-    const gridOptions = {
-      columnDefs,
-      rowData: null,
-      defaultColDef: {
-        sortable: true, filter: true, resizable: true
-      },
-      pagination: true,
-      paginationPageSize: 20
-    };
-
     document.addEventListener('DOMContentLoaded', function () {
-      new agGrid.Grid(document.querySelector('#employeeGrid'), gridOptions);
+      const columnDefs = [
+        { headerName: "사원코드", field: "empCd", width:150 },
+        { headerName: "이름", field: "empNm", width:150 },
+        { headerName: "부서코드", field: "deptCd", width:150 },
+        { headerName: "퇴사여부", field: "ynOut", width:150 },
+        { headerName: "부서직급", field: "deptPosition", width:150 },
+        { headerName: "근무형태", field: "tpWeekly", width:150 }
+      ];
+
+      const gridOptions = {
+        columnDefs: columnDefs,
+        defaultColDef: {
+          sortable: true,
+          filter: true,
+          resizable: true
+        },
+        autoSizeStrategy: {
+          // 자동사이즈정책
+          type: "fitGridWidth", // 그리드넓이기준으로
+          defaultMinWidth: 150, // 컬럼 최소사이즈
+        },
+        rowHeight:45,
+        pagination: true,
+        paginationPageSize: 20,
+        rowData: [] // 빈 상태로 먼저 초기화
+      };
+
+      const gridDiv = document.querySelector('#employeeGrid');
+
+      // ✅ 최신 방식 사용: createGrid (Grid 객체 직접 리턴)
+      const gridApi = agGrid.createGrid(gridDiv, gridOptions);
+
+      // ✅ 서버로부터 데이터 fetch 후 적용
       fetch('/employee/list')
-        .then(r => r.json())
-        .then(data => gridOptions.api.setRowData(data));
+        .then(response => response.json())
+        .then(data => {
+          console.log('받은 데이터:', data);
+          if (Array.isArray(data) && data.length > 0) {
+            gridApi.setGridOption('rowData', data); // 최신 방식
+          } else {
+            console.warn('받은 데이터가 없음');
+          }
+        })
+        .catch(err => console.error('데이터 로딩 오류:', err));
     });
   </script>
 </div>
